@@ -46,7 +46,7 @@ export default function Home() {
           <Input type="email" placeholder="Email" className="mx-auto" />
           <Input type="password" placeholder="Password" className="mt-2 mx-auto" />
           <Button type="submit" className="w-full px-4 py-2 mx-auto mt-2 text-center bg-black text-white font-bold rounded-md ">
-          <Link href="/dashboard" >
+          <Link href="/Dashboard" >
             Login
           </Link>
           </Button>
@@ -54,7 +54,7 @@ export default function Home() {
           <h4 className="mt-4 mx-auto flex justify-center text-muted-foreground">
             OR CONTINUE WITH
           </h4>
-          <Button type='button' variant='outline' className='w-full px-4 py-2 mx-auto mt-2 text-center font-bold rounded-md ' onClick={() => router.push('/github-auth')}>
+          <Button type='button' variant='outline' className='w-full px-4 py-2 mx-auto mt-2 text-center font-bold rounded-md'>
             <FaGithub className='mr-2' />
             Continue with Github
           </Button>
