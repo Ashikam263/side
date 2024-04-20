@@ -45,11 +45,13 @@ export default function Home() {
         <div className="w-full sm:w-1/2 mx-auto mb-4 mt-4 px-2">
           <Input type="email" placeholder="Email" className="mx-auto" />
           <Input type="password" placeholder="Password" className="mt-2 mx-auto" />
-          <Button type="submit" className="w-full px-4 py-2 mx-auto mt-2 text-center bg-black text-white font-bold rounded-md ">
           <Link href="/users" >
+          <Button type="submit" className="w-full px-4 py-2 mx-auto mt-2 text-center bg-black text-white font-bold rounded-md ">
+          
             Login
-          </Link>
+          
           </Button>
+          </Link>
 
           <h4 className="mt-4 mx-auto flex justify-center text-muted-foreground">
             OR CONTINUE WITH

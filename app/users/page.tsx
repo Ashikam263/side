@@ -65,7 +65,7 @@ export default function Dashboard() {
   const [role, setRole] = useState('');
   const [solutions, setSolutions] = useState([]);
   const [modules, setModules] = useState([]);
-  const invoices = [
+  const [invoices, setInvoices] = useState([
     {
       name: "Liam Johnson",
       email: "liamjohnson@outlook.com",
@@ -82,7 +82,8 @@ export default function Dashboard() {
       solutions: "Solution 1, Solution 2",
       activityStatus: "inActive",
     },
-  ];
+  ]);
+
 
   const toggleDarkMode = () => {
     setDarkMode(prevMode => !prevMode);
@@ -96,8 +97,19 @@ export default function Dashboard() {
     // handle logout click action
   };
 
+
   const handleSave = () => {
-    // handle save action
+    const newUser = {
+      name: name,
+      email: email,
+      role: role,
+      modules: modules.join(', '),
+      solutions: solutions.join(', '),
+      activityStatus: status,
+    };
+
+    setInvoices(prevInvoices => [...prevInvoices, newUser]);
+    handleCloseAlert();
   };
 
   const handleAddUserClick = () => {
@@ -117,8 +129,8 @@ export default function Dashboard() {
             {darkMode ? <FiSun className="w-6 h-6" /> : <FiMoon className="w-6 h-6" />}
           </Button>
           <Button variant="outline" onClick={handleHomeClick} className="text-black flex items-center">
-    <Link href="/solutions">Home</Link><FiHome className="ml-1 w-6 h-6" />
-  </Button>
+            <Link href="/solutions">Home</Link><FiHome className="ml-1 w-6 h-6" />
+          </Button>
           <Button variant="outline" onClick={handleLogoutClick} className="text-red-500 border-2 border-red-500">
             Logout<BiPowerOff className="ml-1 w-6 h-6" />
           </Button>
@@ -192,6 +204,7 @@ export default function Dashboard() {
   <div className="flex flex-row items-center">
     <label className="block w-1/4 mr-2 text-right">Name</label>
     <Input type="text" value={name} onChange={(e) => setName(e.target.value)} className='w-full'/>
+
   </div>
   <div className="flex flex-row items-center">
     <label className="block w-1/4 mr-2 text-right">Email</label>
