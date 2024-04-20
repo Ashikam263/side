@@ -39,6 +39,21 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import {
+  Breadcrumb,
+  BreadcrumbEllipsis,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 
 export default function Dashboard() {
@@ -131,10 +146,26 @@ export default function Dashboard() {
         </Button>
       </header>
 
-      {/* User Management Header */}
+      <Breadcrumb className='px-8 m-4'>
+      <BreadcrumbList>
+        <BreadcrumbItem>
+          <BreadcrumbLink href="">Dashboard</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbLink href="">Users</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbPage>All Users</BreadcrumbPage>
+        </BreadcrumbItem>
+      </BreadcrumbList>
+    </Breadcrumb>
+
+      <div className='p-8 bg-slate-100'>
       <header className="flex items-center justify-between px-4 py-2 bg-white text-black border-b-2">
         <div className="flex flex-col">
-          <h1 className="text-3xl font-bold mb-1">User</h1>
+          <h1 className="text-2xl font-bold ">User</h1>
           <span>Manage your user and view their sales performance</span>
         </div>
         <div className="flex items-center">
@@ -159,16 +190,16 @@ export default function Dashboard() {
 
               <div className="flex flex-col space-y-4">
   <div className="flex flex-row items-center">
-    <label className="block w-20 mr-2 text-right">Name</label>
+    <label className="block w-1/4 mr-2 text-right">Name</label>
     <Input type="text" value={name} onChange={(e) => setName(e.target.value)} className='w-full'/>
   </div>
   <div className="flex flex-row items-center">
-    <label className="block w-20 mr-2 text-right">Email</label>
+    <label className="block w-1/4 mr-2 text-right">Email</label>
     <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)}  className='w-full'/>
   </div>
 
   <div className="flex flex-row items-center">
-    <label className="block w-20 mr-2 text-right">Status</label>
+    <label className="block w-1/4 mr-2 text-right">Status</label>
     <Select>
       <SelectTrigger style={{width: '100%'}}>
         <SelectValue placeholder="Status" />
@@ -183,7 +214,7 @@ export default function Dashboard() {
     </Select>
   </div>
   <div className="flex flex-row items-center">
-    <label className="block w-20 mr-2 text-right">Role</label>
+    <label className="block w-1/4 mr-2 text-right">Role</label>
     <Select>
       <SelectTrigger style={{width: '100%'}}>
         <SelectValue placeholder="Role" />
@@ -212,7 +243,7 @@ export default function Dashboard() {
     </div>
   </div>
   <div className="flex flex-col">
-    <label className="block mb-1">Modules</label>
+    <label className="ml-4">Modules</label>
     <div className="ml-20 space-y-2">
       <div className="flex items-center space-x-2 p-4 border-2 border-slate-400 mt-2">
         <Checkbox id="module1" />
@@ -264,8 +295,7 @@ export default function Dashboard() {
       
 
 
-      {/* Table */}
-      <Table className='mt-4'>
+      <Table className=' bg-white'>
         <TableCaption>A list of your recent invoices.</TableCaption>
 
         <TableHeader>
@@ -305,6 +335,7 @@ export default function Dashboard() {
         </TableFooter>
       </Table>
 
+    </div>
     </div>
   );
 }
