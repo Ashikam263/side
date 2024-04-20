@@ -46,7 +46,7 @@ export default function Home() {
           <Input type="email" placeholder="Email" className="mx-auto" />
           <Input type="password" placeholder="Password" className="mt-2 mx-auto" />
           <Button type="submit" className="w-full px-4 py-2 mx-auto mt-2 text-center bg-black text-white font-bold rounded-md ">
-          <Link href="/dashboard" >
+          <Link href="/users" >
             Login
           </Link>
           </Button>

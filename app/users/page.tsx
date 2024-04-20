@@ -116,9 +116,9 @@ export default function Dashboard() {
           <Button variant="outline" onClick={toggleDarkMode} className="text-black ">
             {darkMode ? <FiSun className="w-6 h-6" /> : <FiMoon className="w-6 h-6" />}
           </Button>
-          <Button variant="outline" onClick={handleHomeClick} className="text-black ">
-            Home<FiHome className="ml-1 w-6 h-6" />
-          </Button>
+          <Button variant="outline" onClick={handleHomeClick} className="text-black flex items-center">
+    <Link href="/solutions">Home</Link><FiHome className="ml-1 w-6 h-6" />
+  </Button>
           <Button variant="outline" onClick={handleLogoutClick} className="text-red-500 border-2 border-red-500">
             Logout<BiPowerOff className="ml-1 w-6 h-6" />
           </Button>
