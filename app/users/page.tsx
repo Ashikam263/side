@@ -58,7 +58,7 @@ import {
 
 export default function Dashboard() {
   const [darkMode, setDarkMode] = useState(false);
-  const [showAlert, setShowAlert] = useState(false); // State for managing alert dialogue visibility
+  const [showAlert, setShowAlert] = useState(false); 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState('');
@@ -80,44 +80,60 @@ export default function Dashboard() {
       role: "Admin",
       modules: "Module 1, Modules 2",
       solutions: "Solution 1, Solution 2",
-      activityStatus: "inActive",
+      activityStatus: "Inactive",
     },
   ]);
-
 
   const toggleDarkMode = () => {
     setDarkMode(prevMode => !prevMode);
   };
 
   const handleHomeClick = () => {
-    // handle home click action
   };
 
   const handleLogoutClick = () => {
-    // handle logout click action
   };
 
-
   const handleSave = () => {
+    console.log("Name:", name);
+    console.log("Email:", email);
+    console.log("Role:", role);
+    console.log("Modules:", modules);
+    console.log("Solutions:", solutions);
+    console.log("Status:", status);
+  
     const newUser = {
       name: name,
       email: email,
       role: role,
       modules: modules.join(', '),
       solutions: solutions.join(', '),
-      activityStatus: status,
+      activityStatus: status
     };
 
-    setInvoices(prevInvoices => [...prevInvoices, newUser]);
-    handleCloseAlert();
+    console.log("New User:", newUser);
+  
+    setInvoices([...invoices, newUser]);
+  
+    setName('');
+    setEmail('');
+    setRole('');
+    setModules([]);
+    setSolutions([]);
+    setStatus('');
+  
+    setShowAlert(false);
   };
+  
+  
+  
 
   const handleAddUserClick = () => {
-    setShowAlert(true); // Show the alert dialogue
+    setShowAlert(true); 
   };
 
   const handleCloseAlert = () => {
-    setShowAlert(false); // Hide the alert dialogue
+    setShowAlert(false); 
   };
 
   return (
@@ -204,7 +220,6 @@ export default function Dashboard() {
   <div className="flex flex-row items-center">
     <label className="block w-1/4 mr-2 text-right">Name</label>
     <Input type="text" value={name} onChange={(e) => setName(e.target.value)} className='w-full'/>
-
   </div>
   <div className="flex flex-row items-center">
     <label className="block w-1/4 mr-2 text-right">Email</label>
@@ -219,27 +234,27 @@ export default function Dashboard() {
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectItem value="completed">Completed</SelectItem>
-          <SelectItem value="in progress">In Progress</SelectItem>
-          <SelectItem value="unavailable">Unavailable</SelectItem>
+          <SelectItem value="Active">Active</SelectItem>
+          <SelectItem value="Inactive">Inactive</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>
   </div>
   <div className="flex flex-row items-center">
     <label className="block w-1/4 mr-2 text-right">Role</label>
-    <Select>
-      <SelectTrigger style={{width: '100%'}}>
-        <SelectValue placeholder="Role" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          <SelectItem value="admin">Admin</SelectItem>
-          <SelectItem value="sales">Sales</SelectItem>
-          <SelectItem value="manager">Manager</SelectItem>
-        </SelectGroup>
-      </SelectContent>
-    </Select>
+    <Select onChange={(e) => setRole(e.target.value)}>
+  <SelectTrigger style={{width: '100%'}}>
+    <SelectValue placeholder="Role" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectGroup>
+      <SelectItem value="admin">Admin</SelectItem>
+      <SelectItem value="sales">Sales</SelectItem>
+      <SelectItem value="manager">Manager</SelectItem>
+    </SelectGroup>
+  </SelectContent>
+</Select>
+
   </div>
 
   <div className="flex flex-row items-center">
@@ -308,7 +323,7 @@ export default function Dashboard() {
       
 
 
-      <Table className=' bg-white'>
+      <Table className=' bg-white text-black'>
         <TableCaption>A list of your recent invoices.</TableCaption>
 
         <TableHeader>
@@ -341,10 +356,6 @@ export default function Dashboard() {
           ))}
         </TableBody>
         <TableFooter>
-          {/* <TableRow>
-            <TableCell colSpan={3}>Total</TableCell>
-            <TableCell className="">$2,500.00</TableCell>
-          </TableRow> */}
         </TableFooter>
       </Table>
 
