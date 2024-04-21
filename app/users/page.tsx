@@ -63,8 +63,8 @@ export default function Dashboard() {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState('');
   const [role, setRole] = useState('');
-  const [solutions, setSolutions] = useState([]);
-  const [modules, setModules] = useState([]);
+  const [solutions, setSolutions] = useState<string[]>([]);
+  const [modules, setModules] = useState<string[]>([]);
   const [invoices, setInvoices] = useState([
     {
       name: "Liam Johnson",
@@ -125,8 +125,22 @@ export default function Dashboard() {
     setShowAlert(false);
   };
   
+  const handleSolutionChange = (solutionName: string, checked: boolean) => {
+    if (checked) {
+      setSolutions(prevSolutions => [...prevSolutions, solutionName]);
+    } else {
+      setSolutions(prevSolutions => prevSolutions.filter(solution => solution !== solutionName));
+    }
+  };
   
   
+  const handleModuleChange = (moduleName: string, checked: boolean) => {
+    if (checked) {
+      setModules(prevModules => [...prevModules, moduleName]);
+    } else {
+      setModules(prevModules => prevModules.filter(module => module !== moduleName));
+    }
+  };
 
   const handleAddUserClick = () => {
     setShowAlert(true); 
@@ -211,7 +225,7 @@ export default function Dashboard() {
               <AlertDialogHeader>
                 <AlertDialogTitle>Add User</AlertDialogTitle>
                 <AlertDialogDescription>
-                  Make changes to your user here. Click save when you're done.
+                  Make changes to your user here. Click save when you are done.
                 </AlertDialogDescription>
               </AlertDialogHeader>
 
@@ -234,23 +248,24 @@ export default function Dashboard() {
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectItem value="Active">Active</SelectItem>
-          <SelectItem value="Inactive">Inactive</SelectItem>
+          <SelectItem value="Active" onClick={() => setStatus("Active")}>Active</SelectItem>
+          <SelectItem value="Inactive" onClick={() => setStatus("Inactive")}>Inactive</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>
   </div>
   <div className="flex flex-row items-center">
     <label className="block w-1/4 mr-2 text-right">Role</label>
-    <Select onChange={(e) => setRole(e.target.value)}>
+    <Select>
   <SelectTrigger style={{width: '100%'}}>
     <SelectValue placeholder="Role" />
   </SelectTrigger>
   <SelectContent>
     <SelectGroup>
-      <SelectItem value="admin">Admin</SelectItem>
-      <SelectItem value="sales">Sales</SelectItem>
-      <SelectItem value="manager">Manager</SelectItem>
+    <SelectItem value="admin" onClick={() => setRole("admin")}>Admin</SelectItem>
+<SelectItem value="sales" onClick={() => setRole("sales")}>Sales</SelectItem>
+<SelectItem value="manager" onClick={() => setRole("manager")}>Manager</SelectItem>
+
     </SelectGroup>
   </SelectContent>
 </Select>
@@ -260,11 +275,11 @@ export default function Dashboard() {
   <div className="flex flex-row items-center">
     <label className="block w-20 mr-2 text-right">Solutions</label>
     <div className="flex items-center space-x-2">
-      <Checkbox id="solution1" />
+    <Checkbox id="solution1" onChange={(e) => handleSolutionChange("Solution 1", e.target.checked)} />
       <label htmlFor="solution1" className="text-sm font-medium leading-none">
         Solution 1
       </label>
-      <Checkbox id="solution2" />
+      <Checkbox id="solution2" onChange={(e) => handleSolutionChange("Solution 2", e.target.checked)} />
       <label htmlFor="solution2" className="text-sm font-medium leading-none">
         Solution 2
       </label>
@@ -274,7 +289,7 @@ export default function Dashboard() {
     <label className="ml-4">Modules</label>
     <div className="ml-20 space-y-2">
       <div className="flex items-center space-x-2 p-4 border-2 border-slate-400 mt-2">
-        <Checkbox id="module1" />
+      <Checkbox id="module1" onChange={(e) => handleModuleChange("Module 1", e.target.checked)} />
         <div className="flex flex-col">
           <label htmlFor="module1" className="text-sm font-medium leading-none">
             Module 1
@@ -285,7 +300,7 @@ export default function Dashboard() {
         </div>
       </div>
       <div className="flex items-center space-x-2 p-4 border-2 border-slate-400 mt-2">
-        <Checkbox id="module2" />
+      <Checkbox id="module2" onChange={(e) => handleModuleChange("Module 2", e.target.checked)} />
         <div className="flex flex-col">
           <label htmlFor="module2" className="text-sm font-medium leading-none">
             Module 2
@@ -296,7 +311,7 @@ export default function Dashboard() {
         </div>
       </div>
       <div className="flex items-center space-x-2 p-4 border-2 border-slate-400 mt-2">
-        <Checkbox id="module3" />
+      <Checkbox id="module3" onChange={(e) => handleModuleChange("Module 3", e.target.checked)} />
         <div className="flex flex-col">
           <label htmlFor="module3" className="text-sm font-medium leading-none">
             Module 3
