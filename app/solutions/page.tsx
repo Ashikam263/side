@@ -202,9 +202,8 @@ export default function Dashboard() {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup>
-                          <SelectItem value="completed">Live</SelectItem>
-                          <SelectItem value="in progress">Offline</SelectItem>
-                          <SelectItem value="unavailable">Rewatch</SelectItem>
+                          <SelectItem value="Active">Active</SelectItem>
+                          <SelectItem value="Inactive">Inactive</SelectItem>
                         </SelectGroup>
                       </SelectContent>
                     </Select>
