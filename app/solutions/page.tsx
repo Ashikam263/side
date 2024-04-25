@@ -57,19 +57,21 @@ import {
 
 export default function Dashboard() {
   const [darkMode, setDarkMode] = useState(false);
-  const [showAlert, setShowAlert] = useState(false); // State for managing alert dialogue visibility
+  const [showAlert, setShowAlert] = useState(false);
   const [name, setName] = useState('');
-  const [status, setStatus] = useState('Active');
+  const [status, setStatus] = useState('Inactive');
   const [countries, setCountries] = useState([]);
   const [modules, setModules] = useState([]);
   const [invoices, setInvoices] = useState([
     {
+      id: 1,
       name: "Product 1",
       modules: "Module 1, Modules 2",
       countries: "Qatar, Saudi Arabia",
       activityStatus: "Active",
     },
     {
+      id: 2,
       name: "Product 2",
       modules: "Module 1, Modules 2",
       countries: "Qatar, Saudi Arabia",
@@ -77,7 +79,7 @@ export default function Dashboard() {
     },
   ]);
 
-  const mapCountryName = (country) => {
+  const mapCountryName = (country: string) => {
     switch (country) {
       case 'Qatar':
         return '🇶🇦 QTR';
@@ -100,6 +102,7 @@ export default function Dashboard() {
 
   const handleSave = () => {
     const newInvoice = {
+      id: invoices.length + 1,
       name,
       modules: modules.join(', '),
       countries: countries.join(', '),
@@ -207,7 +210,7 @@ export default function Dashboard() {
                     <label className="block w-1/4 mr-2 text-right">Active</label>
                     <Select value={status} onChange={(e) => setStatus(e.target.value)}>
                       <SelectTrigger style={{ width: '100%' }}>
-                        <SelectValue placeholder="Theme" />
+                        <SelectValue placeholder="Activity Status" />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup>
@@ -297,7 +300,7 @@ export default function Dashboard() {
           </TableHeader>
           <TableBody>
             {invoices.map((invoice) => (
-              <TableRow key={invoice.name}>
+              <TableRow key={invoice.id}>
                 <TableCell className="font-medium whitespace-nowrap text-right">
                   <span>{invoice.name}</span>
                 </TableCell>
