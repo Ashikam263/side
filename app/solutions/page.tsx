@@ -1,5 +1,4 @@
-"use client";
-
+"use client"
 import { useState } from 'react';
 import { FiSun, FiMoon, FiHome, FiLogOut } from 'react-icons/fi';
 import { BiPowerOff } from "react-icons/bi";
@@ -60,10 +59,10 @@ export default function Dashboard() {
   const [darkMode, setDarkMode] = useState(false);
   const [showAlert, setShowAlert] = useState(false); // State for managing alert dialogue visibility
   const [name, setName] = useState('');
-  const [status, setStatus] = useState('');
-  const [role, setRole] = useState('');
+  const [status, setStatus] = useState('Active');
+  const [countries, setCountries] = useState([]);
   const [modules, setModules] = useState([]);
-  const invoices = [
+  const [invoices, setInvoices] = useState([
     {
       name: "Product 1",
       modules: "Module 1, Modules 2",
@@ -76,7 +75,8 @@ export default function Dashboard() {
       countries: "Qatar, Saudi Arabia",
       activityStatus: "Inactive",
     },
-  ];
+  ]);
+
   const mapCountryName = (country) => {
     switch (country) {
       case 'Qatar':
@@ -87,6 +87,7 @@ export default function Dashboard() {
         return country;
     }
   };
+
   const toggleDarkMode = () => {
     setDarkMode(prevMode => !prevMode);
   };
@@ -98,6 +99,14 @@ export default function Dashboard() {
   };
 
   const handleSave = () => {
+    const newInvoice = {
+      name,
+      modules: modules.join(', '),
+      countries: countries.join(', '),
+      activityStatus: status,
+    };
+    setInvoices(prevInvoices => [...prevInvoices, newInvoice]);
+    setShowAlert(false);
   };
 
   const handleAddUserClick = () => {
@@ -166,7 +175,7 @@ export default function Dashboard() {
         <header className="flex items-center justify-between px-4 py-2 bg-white text-black border-b-2">
           <div className="flex flex-col">
             <h1 className="text-2xl font-bold ">Solutions</h1>
-            <span>Manage your solutions and view their sales perfomance</span>
+            <span>Manage your solutions and view their sales performance</span>
           </div>
           <div className="flex items-center">
             <Input type="email" placeholder="Search User" className="mr-2" />
@@ -196,7 +205,7 @@ export default function Dashboard() {
 
                   <div className="flex flex-row items-center">
                     <label className="block w-1/4 mr-2 text-right">Active</label>
-                    <Select>
+                    <Select value={status} onChange={(e) => setStatus(e.target.value)}>
                       <SelectTrigger style={{ width: '100%' }}>
                         <SelectValue placeholder="Theme" />
                       </SelectTrigger>
@@ -212,13 +221,13 @@ export default function Dashboard() {
                   <div className="flex flex-row items-center">
                     <label className="block w-20 mr-2 text-right">Countries</label>
                     <div className="flex items-center space-x-2">
-                      <Checkbox id="solution1" />
-                      <label htmlFor="solution1" className="text-sm font-medium leading-none">
-                      🇶🇦 Qatar
+                      <Checkbox id="Qatar" onChange={(e) => setCountries(prevCountries => [...prevCountries, e.target.id])} />
+                      <label htmlFor="Qatar" className="text-sm font-medium leading-none">
+                        🇶🇦 Qatar
                       </label>
-                      <Checkbox id="solution2" />
-                      <label htmlFor="solution2" className="text-sm font-medium leading-none">
-                      🇸🇦 Saudi Arabia
+                      <Checkbox id="SaudiArabia" onChange={(e) => setCountries(prevCountries => [...prevCountries, e.target.id])} />
+                      <label htmlFor="SaudiArabia" className="text-sm font-medium leading-none">
+                        🇸🇦 Saudi Arabia
                       </label>
                     </div>
                   </div>
@@ -226,9 +235,9 @@ export default function Dashboard() {
                     <label className="ml-4">Modules</label>
                     <div className="ml-20 space-y-2">
                       <div className="flex items-center space-x-2 p-4 border-2 border-slate-400 mt-2 rounded">
-                        <Checkbox id="module1" />
+                        <Checkbox id="Module1" onChange={(e) => setModules(prevModules => [...prevModules, e.target.id])} />
                         <div className="flex flex-col">
-                          <label htmlFor="module1" className="text-sm font-medium leading-none">
+                          <label htmlFor="Module1" className="text-sm font-medium leading-none">
                             Module 1
                           </label>
                           <p className="text-sm text-muted-foreground">
@@ -237,9 +246,9 @@ export default function Dashboard() {
                         </div>
                       </div>
                       <div className="flex items-center space-x-2 p-4 border-2 border-slate-400 mt-2">
-                        <Checkbox id="module2" />
+                        <Checkbox id="Module2" onChange={(e) => setModules(prevModules => [...prevModules, e.target.id])} />
                         <div className="flex flex-col">
-                          <label htmlFor="module2" className="text-sm font-medium leading-none">
+                          <label htmlFor="Module2" className="text-sm font-medium leading-none">
                             Module 2
                           </label>
                           <p className="text-sm text-muted-foreground">
@@ -248,9 +257,9 @@ export default function Dashboard() {
                         </div>
                       </div>
                       <div className="flex items-center space-x-2 p-4 border-2 border-slate-400 mt-2">
-                        <Checkbox id="module3" />
+                        <Checkbox id="Module3" onChange={(e) => setModules(prevModules => [...prevModules, e.target.id])} />
                         <div className="flex flex-col">
-                          <label htmlFor="module3" className="text-sm font-medium leading-none">
+                          <label htmlFor="Module3" className="text-sm font-medium leading-none">
                             Module 3
                           </label>
                           <p className="text-sm text-muted-foreground">
