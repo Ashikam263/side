@@ -131,28 +131,6 @@ export default function Dashboard() {
     }
   };
 
-  
-To update the display of module names based on checkbox selections, where selecting the first checkbox shows "Module 1" and subsequent checkboxes display "Module 1, Module 2", "Module 1, Module 2, Module 3", etc., you can adjust the rendering logic in the component. Here's how you can modify the relevant part of your code:
-
-javascript
-Copy code
-import React, { useState } from 'react';
-
-export default function Dashboard() {
-  // Existing code...
-
-  const [selectedModules, setSelectedModules] = useState([]);
-
-  const handleModuleCheckboxChange = (moduleId) => {
-    if (selectedModules.includes(moduleId)) {
-      // Module already selected, remove it
-      setSelectedModules((prevModules) => prevModules.filter((id) => id !== moduleId));
-    } else {
-      // Module not selected, add it
-      setSelectedModules((prevModules) => [...prevModules, moduleId]);
-    }
-  };
-
   const renderSelectedModules = () => {
     if (selectedModules.length === 0) {
       return 'Select modules...';
@@ -288,56 +266,43 @@ export default function Dashboard() {
                     </div>
                   </div>
                   <div className="flex flex-col">
-        <label className="ml-4">Modules</label>
-        <div className="ml-20 space-y-2">
-          <div className="flex items-center space-x-2 p-4 border-2 border-slate-400 mt-2 rounded">
-            <input
-              type="checkbox"
-              id="Module1"
-              onChange={() => handleModuleCheckboxChange('Module1')}
-            />
-            <div className="flex flex-col">
-              <label htmlFor="Module1" className="text-sm font-medium leading-none">
-                Module 1
-              </label>
-              <p className="text-sm text-muted-foreground">
-                A very very long description for Module 1
-              </p>
-            </div>
-          </div>
-          <div className="flex items-center space-x-2 p-4 border-2 border-slate-400 mt-2">
-            <input
-              type="checkbox"
-              id="Module2"
-              onChange={() => handleModuleCheckboxChange('Module2')}
-            />
-            <div className="flex flex-col">
-              <label htmlFor="Module2" className="text-sm font-medium leading-none">
-                Module 2
-              </label>
-              <p className="text-sm text-muted-foreground">
-                A very very long description for Module 2
-              </p>
-            </div>
-          </div>
-          <div className="flex items-center space-x-2 p-4 border-2 border-slate-400 mt-2">
-            <input
-              type="checkbox"
-              id="Module3"
-              onChange={() => handleModuleCheckboxChange('Module3')}
-            />
-            <div className="flex flex-col">
-              <label htmlFor="Module3" className="text-sm font-medium leading-none">
-                Module 3
-              </label>
-              <p className="text-sm text-muted-foreground">
-                A very very long description for Module 3
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
+                    <label className="ml-4">Modules</label>
+                    <div className="ml-20 space-y-2">
+                      <div className="flex items-center space-x-2 p-4 border-2 border-slate-400 mt-2 rounded">
+                        <Checkbox id="Module1" onChange={(e) => setModules(prevModules => [...prevModules, e.target.id])} />
+                        <div className="flex flex-col">
+                          <label htmlFor="Module1" className="text-sm font-medium leading-none">
+                            Module 1
+                          </label>
+                          <p className="text-sm text-muted-foreground">
+                            A very very long description for Module 1
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-center space-x-2 p-4 border-2 border-slate-400 mt-2">
+                        <Checkbox id="Module2" onChange={(e) => setModules(prevModules => [...prevModules, e.target.id])} />
+                        <div className="flex flex-col">
+                          <label htmlFor="Module2" className="text-sm font-medium leading-none">
+                            Module 2
+                          </label>
+                          <p className="text-sm text-muted-foreground">
+                            A very very long description for Module 2
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-center space-x-2 p-4 border-2 border-slate-400 mt-2">
+                        <Checkbox id="Module3" onChange={(e) => setModules(prevModules => [...prevModules, e.target.id])} />
+                        <div className="flex flex-col">
+                          <label htmlFor="Module3" className="text-sm font-medium leading-none">
+                            Module 3
+                          </label>
+                          <p className="text-sm text-muted-foreground">
+                            A very very long description for Module 3
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 <AlertDialogFooter className="flex justify-end">
@@ -377,18 +342,7 @@ export default function Dashboard() {
                     <Button variant="outline" className='border-red-400 border-2 text-red-400'>{invoice.activityStatus}</Button>
                   )}
                 </TableCell>
-                <TableCell className="text-right">
-                {invoice.modules}
-                <div className="mt-2">
-                  {/* Render selected modules dynamically */}
-                  {selectedModules.length > 0 && (
-                    <div>
-                      <label className="font-medium">Selected Modules:</label>
-                      <div className="ml-2">{renderSelectedModules()}</div>
-                    </div>
-                  )}
-                </div>
-              </TableCell>
+                <TableCell className='text-right'>{invoice.modules}</TableCell>
                 <TableCell className="text-right">
                 {invoice.countries.split(', ').map((country) => (
                   <div
