@@ -224,14 +224,14 @@ export default function Dashboard() {
                   <div className="flex flex-row items-center">
                     <label className="block w-20 mr-2 text-right">Countries</label>
                     <div className="flex items-center space-x-2">
-                      <Checkbox id="Qatar" onChange={(e) => setCountries(prevCountries => [...prevCountries, e.target.id])} />
-                      <label htmlFor="Qatar" className="text-sm font-medium leading-none">
-                        🇶🇦 Qatar
-                      </label>
-                      <Checkbox id="SaudiArabia" onChange={(e) => setCountries(prevCountries => [...prevCountries, e.target.id])} />
-                      <label htmlFor="SaudiArabia" className="text-sm font-medium leading-none">
-                        🇸🇦 Saudi Arabia
-                      </label>
+                    <Checkbox id="Qatar" onChange={(e) => setCountries(prevCountries => [...prevCountries, e.target.id])} />
+                    <label htmlFor="Qatar" className="text-sm font-medium leading-none">
+                      🇶🇦 Qatar
+                    </label>
+                    <Checkbox id="SaudiArabia" onChange={(e) => setCountries(prevCountries => [...prevCountries, e.target.id])} />
+                    <label htmlFor="SaudiArabia" className="text-sm font-medium leading-none">
+                      🇸🇦 Saudi Arabia
+                    </label>
                     </div>
                   </div>
                   <div className="flex flex-col">
@@ -313,12 +313,12 @@ export default function Dashboard() {
                 </TableCell>
                 <TableCell className='text-right'>{invoice.modules}</TableCell>
                 <TableCell className="text-right">
-                  {invoice.countries.split(', ').map(country => (
-                    <div key={country} style={{ display: 'inline-block', padding: '2px', border: '1px solid', borderRadius: '5px', margin: '2px', backgroundColor: '#FEFDED' }}>
-                      {mapCountryName(country)}
-                    </div>
-                  ))}
-                </TableCell>
+                {invoice.countries.split(', ').map(country => (
+                  <div key={country} style={{ display: 'inline-block', padding: '2px', border: '1px solid', borderRadius: '5px', margin: '2px', backgroundColor: '#FEFDED' }}>
+                    {mapCountryName(country)}
+                  </div>
+                ))}
+              </TableCell>
               </TableRow>
             ))}
           </TableBody>
