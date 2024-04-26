@@ -313,8 +313,18 @@ export default function Dashboard() {
                 </TableCell>
                 <TableCell className='text-right'>{invoice.modules}</TableCell>
                 <TableCell className="text-right">
-                {invoice.countries.split(', ').map(country => (
-                  <div key={country} style={{ display: 'inline-block', padding: '2px', border: '1px solid', borderRadius: '5px', margin: '2px', backgroundColor: '#FEFDED' }}>
+                {invoice.countries.split(', ').map((country) => (
+                  <div
+                    key={country}
+                    style={{
+                      display: 'inline-block',
+                      padding: '2px',
+                      border: '1px solid',
+                      borderRadius: '5px',
+                      margin: '2px',
+                      backgroundColor: '#FEFDED',
+                    }}
+                  >
                     {mapCountryName(country)}
                   </div>
                 ))}
