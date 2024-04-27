@@ -80,7 +80,7 @@ export default function Dashboard() {
     },
   ]);
 
-  const mapCountryName = (country: string) => {
+  const mapCountryName = (country) => {
     switch (country) {
       case 'Qatar':
         return '🇶🇦 QTR';
@@ -101,16 +101,33 @@ export default function Dashboard() {
   const handleLogoutClick = () => {
   };
 
+
   const handleSave = () => {
     const newInvoice = {
       id: invoices.length + 1,
       name,
-      modules: modules.join(', '),
-      countries: countries.join(', '),
+      modules: selectedModules.map((moduleId) => {
+        switch (moduleId) {
+          case 'Module1':
+            return 'Module 1';
+          case 'Module2':
+            return 'Module 2';
+          case 'Module3':
+            return 'Module 3';
+          default:
+            return '';
+        }
+      }).join(', '),
+      countries: countries.map((country) => mapCountryName(country)).join(', '),
       activityStatus: status,
     };
-    setInvoices(prevInvoices => [...prevInvoices, newInvoice]);
+    setInvoices((prevInvoices) => [...prevInvoices, newInvoice]);
     setShowAlert(false);
+    setName('');
+    setStatus('Inactive');
+    setCountries([]);
+    setModules([]);
+    setSelectedModules([]);
   };
 
   const handleAddUserClick = () => {
