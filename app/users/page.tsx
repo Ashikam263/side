@@ -275,11 +275,11 @@ export default function Dashboard() {
                   <div className="flex flex-row items-center">
                     <label className="block w-20 mr-2 text-right">Solutions</label>
                     <div className="flex items-center space-x-2">
-                      <Checkbox id="solution1" onChange={(e) => handleSolutionChange("Solution 1", e.target.checked)} />
+                      <Checkbox id="solution1" onChange={(e) => handleSolutionChange("Solution 1", (e.target as HTMLInputElement).checked)} />
                       <label htmlFor="solution1" className="text-sm font-medium leading-none">
                         Solution 1
                       </label>
-                      <Checkbox id="solution2" onChange={(e) => handleSolutionChange("Solution 2", e.target.checked)} />
+                      <Checkbox id="solution2" onChange={(e) => handleSolutionChange("Solution 2", (e.target as HTMLInputElement).checked)} />
                       <label htmlFor="solution2" className="text-sm font-medium leading-none">
                         Solution 2
                       </label>
@@ -289,7 +289,7 @@ export default function Dashboard() {
                     <label className="ml-4">Modules</label>
                     <div className="ml-20 space-y-2">
                       <div className="flex items-center space-x-2 p-4 border-2 border-slate-400 mt-2">
-                        <Checkbox id="module1" onChange={(e) => handleModuleChange("Module 1", e.target.checked)} />
+                        <Checkbox id="module1" onChange={(e) => handleModuleChange("Module 1", (e.target as HTMLInputElement).checked)} />
                         <div className="flex flex-col">
                           <label htmlFor="module1" className="text-sm font-medium leading-none">
                             Module 1
@@ -299,28 +299,8 @@ export default function Dashboard() {
                           </p>
                         </div>
                       </div>
-                      <div className="flex items-center space-x-2 p-4 border-2 border-slate-400 mt-2">
-                        <Checkbox id="module2" onChange={(e) => handleModuleChange("Module 2", e.target.checked)} />
-                        <div className="flex flex-col">
-                          <label htmlFor="module2" className="text-sm font-medium leading-none">
-                            Module 2
-                          </label>
-                          <p className="text-sm text-muted-foreground">
-                            A very very long description for Module 2
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex items-center space-x-2 p-4 border-2 border-slate-400 mt-2">
-                        <Checkbox id="module3" onChange={(e) => handleModuleChange("Module 3", e.target.checked)} />
-                        <div className="flex flex-col">
-                          <label htmlFor="module3" className="text-sm font-medium leading-none">
-                            Module 3
-                          </label>
-                          <p className="text-sm text-muted-foreground">
-                            A very very long description for Module 3
-                          </p>
-                        </div>
-                      </div>
+                      <Checkbox id="module2" onChange={(e) => handleModuleChange("Module 2", (e.target as HTMLInputElement).checked)} />
+                      <Checkbox id="module3" onChange={(e) => handleModuleChange("Module 3", (e.target as HTMLInputElement).checked)} />
                     </div>
                   </div>
                 </div>
