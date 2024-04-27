@@ -103,25 +103,33 @@ export default function Dashboard() {
 
 
   const handleSave = () => {
+    const selectedModuleNames = selectedModules.map((moduleId) => {
+      switch (moduleId) {
+        case 'Module1':
+          return 'Module 1';
+        case 'Module2':
+          return 'Module 2';
+        case 'Module3':
+          return 'Module 3';
+        default:
+          return '';
+      }
+    });
+  
+    const formattedModules = selectedModuleNames.join(', ');
+    const formattedCountries = countries.map((country) => mapCountryName(country)).join(', ');
+  
     const newInvoice = {
       id: invoices.length + 1,
       name,
-      modules: selectedModules.map((moduleId) => {
-        switch (moduleId) {
-          case 'Module1':
-            return 'Module 1';
-          case 'Module2':
-            return 'Module 2';
-          case 'Module3':
-            return 'Module 3';
-          default:
-            return '';
-        }
-      }).join(', '),
-      countries: countries.map((country) => mapCountryName(country)).join(', '),
+      modules: formattedModules,
+      countries: formattedCountries,
       activityStatus: status,
     };
+  
     setInvoices((prevInvoices) => [...prevInvoices, newInvoice]);
+  
+    // Reset form fields and selections
     setShowAlert(false);
     setName('');
     setStatus('Inactive');
@@ -129,6 +137,7 @@ export default function Dashboard() {
     setModules([]);
     setSelectedModules([]);
   };
+  
 
   const handleAddUserClick = () => {
     setShowAlert(true); // Show the alert dialogue
