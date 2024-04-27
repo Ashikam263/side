@@ -54,15 +54,25 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
+const solutionModules = [
+  { id: 'Module1', name: 'Module 1', description: 'A very very long description for Module 1' },
+  { id: 'Module2', name: 'Module 2', description: 'A very very long description for Module 2' },
+  { id: 'Module3', name: 'Module 3', description: 'A very very long description for Module 3' },
+];
+
+const activityStatusOptions = [
+  { value: 'Active', label: 'Active' },
+  { value: 'Inactive', label: 'Inactive' },
+];
 
 export default function Dashboard() {
   const [darkMode, setDarkMode] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [name, setName] = useState('');
   const [status, setStatus] = useState('Inactive');
-  const [countries, setCountries] = useState([]);
+  const [countries, setCountries] = useState<string[]>([]);
   const [modules, setModules] = useState([]);
-  const [selectedModules, setSelectedModules] = useState([]);
+  const [selectedModules, setSelectedModules] = useState<string[]>([]);
   const [invoices, setInvoices] = useState([
     {
       id: 1,
@@ -80,7 +90,7 @@ export default function Dashboard() {
     },
   ]);
 
-  const mapCountryName = (country) => {
+  const mapCountryName = (country: string) => {
     switch (country) {
       case 'Qatar':
         return '🇶🇦 QTR';
@@ -147,7 +157,12 @@ export default function Dashboard() {
     setShowAlert(false); // Hide the alert dialogue
   };
 
-  const handleModuleCheckboxChange = (moduleId) => {
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id } = e.target;
+    setCountries(prevCountries => [...prevCountries, id]);
+  };
+
+  const handleModuleCheckboxChange = (moduleId: string) => {
     if (selectedModules.includes(moduleId)) {
       // Module already selected, remove it
       setSelectedModules((prevModules) => prevModules.filter((id) => id !== moduleId));
@@ -157,25 +172,6 @@ export default function Dashboard() {
     }
   };
 
-  const renderSelectedModules = () => {
-    if (selectedModules.length === 0) {
-      return 'Select modules...';
-    } else {
-      const selectedModuleNames = selectedModules.map((moduleId) => {
-        switch (moduleId) {
-          case 'Module1':
-            return 'Module 1';
-          case 'Module2':
-            return 'Module 2';
-          case 'Module3':
-            return 'Module 3';
-          default:
-            return '';
-        }
-      });
-      return selectedModuleNames.join(', ');
-    }
-  };
 
   return (
     <div className="p-4">
@@ -265,7 +261,7 @@ export default function Dashboard() {
 
                   <div className="flex flex-row items-center">
                     <label className="block w-1/4 mr-2 text-right">Active</label>
-                    <Select value={status} onChange={(e) => setStatus(e.target.value)}>
+                    <Select value={status} onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setStatus(e.target.value)}>
                       <SelectTrigger style={{ width: '100%' }}>
                         <SelectValue placeholder="Activity Status" />
                       </SelectTrigger>
@@ -295,7 +291,7 @@ export default function Dashboard() {
                     <label className="ml-4">Modules</label>
                     <div className="ml-20 space-y-2">
                       <div className="flex items-center space-x-2 p-4 border-2 border-slate-400 mt-2 rounded">
-                        <Checkbox id="Module1" onChange={(e) => setModules(prevModules => [...prevModules, e.target.id])} />
+                        <Checkbox id="Module1" onChange={(e) => setSelectedModules((prevModules) => [...prevModules, 'newModule'])} />
                         <div className="flex flex-col">
                           <label htmlFor="Module1" className="text-sm font-medium leading-none">
                             Module 1
@@ -306,7 +302,7 @@ export default function Dashboard() {
                         </div>
                       </div>
                       <div className="flex items-center space-x-2 p-4 border-2 border-slate-400 mt-2">
-                        <Checkbox id="Module2" onChange={(e) => setModules(prevModules => [...prevModules, e.target.id])} />
+                        <Checkbox id="Module2" onChange={(e) => setSelectedModules((prevModules) => [...prevModules, 'newModule'])} />
                         <div className="flex flex-col">
                           <label htmlFor="Module2" className="text-sm font-medium leading-none">
                             Module 2
@@ -317,7 +313,7 @@ export default function Dashboard() {
                         </div>
                       </div>
                       <div className="flex items-center space-x-2 p-4 border-2 border-slate-400 mt-2">
-                        <Checkbox id="Module3" onChange={(e) => setModules(prevModules => [...prevModules, e.target.id])} />
+                        <Checkbox id="Module3" onChange={(e) => setSelectedModules((prevModules) => [...prevModules, 'newModule'])} />
                         <div className="flex flex-col">
                           <label htmlFor="Module3" className="text-sm font-medium leading-none">
                             Module 3
